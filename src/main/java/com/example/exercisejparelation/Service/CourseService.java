@@ -53,4 +53,16 @@ public class CourseService {
         c.setTeacher(t);
         courseRepository.save(c);
     }
+
+    public String teacherNameByCourseID(int course_ID) {
+        Course c = courseRepository.findCourseById(course_ID);
+        if(c == null) {
+            throw new ApiException("Course not found");
+        }
+        if (c.getTeacher().getName()==null){
+            throw new ApiException("Teacher doesn't have course");
+        }
+        return c.getTeacher().getName();
+
+    }
 }
